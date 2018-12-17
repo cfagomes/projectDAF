@@ -71,6 +71,11 @@ class AnswerSpec extends ObjectBehavior
         $this->body()->shouldBe($this->body);
     }
 
+    function it_has_a_date()
+    {
+        $this->datePublished()->shouldBeAnInstanceOf(\DateTimeImmutable::class);
+    }
+
     function it_can_have_a_correct_answer()
     {
         $this->correctAnswer()->shouldBe($this->correctAnswer);

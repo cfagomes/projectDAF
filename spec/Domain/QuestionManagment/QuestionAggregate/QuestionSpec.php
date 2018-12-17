@@ -61,6 +61,11 @@ class QuestionSpec extends ObjectBehavior
         $this->user()->shouldBe($this->user);
     }
 
+    function it_has_a_date()
+    {
+        $this->datePublished()->shouldBeAnInstanceOf(\DateTimeImmutable::class);
+    }
+
     function it_can_add_an_answer(Answer $answer)
     {
         $arrayAnswers = $this->answer()->getWrappedObject();  //unzip answers XD
