@@ -9,6 +9,7 @@ use App\Domain\QuestionManagment\AnswersRepository;
 use App\Domain\QuestionManagment\QuestionAggregate\Question;
 use App\Domain\UserManagement\User;
 use PhpSpec\ObjectBehavior;
+use PhpSpec\Wrapper\Collaborator;
 use Prophecy\Argument;
 
 class CreateAnswerHandlerSpec extends ObjectBehavior
