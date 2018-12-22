@@ -41,12 +41,11 @@ class QuestionInfoController extends AbstractController
             $tags = explode(",",filter_var($_POST['tags'], FILTER_SANITIZE_STRING));
         }
 
-        $mail = new Email('john.doe@example.com');
-        $user = new User("test", $mail);
 
-        $command = new CreateQuestionCommand($user, $title, $body, $tags);
-        $this->handler->handle($command);
 
-        return new Response(json_encode("Question Created"), 200, ['content-type' => 'application/json']);
+        $command = new CreateQuestionCommand($this->currentUser(), $title, $body, $tags);
+
+
+        return new Response(json_encode($this->handler->handle($command)), 200, ['content-type' => 'application/json']);
     }
 }

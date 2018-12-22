@@ -13,52 +13,77 @@ use App\Domain\QuestionManagment\QuestionAggregate\Question;
 use App\Domain\UserManagement\User;
 use DateTimeImmutable;
 use JsonSerializable;
+use Doctrine\ORM\Mapping as ORM;
 use League\OAuth2\Server\Entities\UserEntityInterface;
 
 /**
  * Answer
  *
  * @package App\Domain\QuestionManagment\AnswerAggregate
+ *
+ * @ORM\Entity()
+ * @ORM\Table(name="answers")
+ * @IgnoreAnnotation("OA\Schema")
+ * @IgnoreAnnotation("OA\Property")
+ *
+ * @OA\Schema(
+ *     description="Answer",
+ *     title="Answer"
+ * )
  */
 class Answer implements JsonSerializable
 {
     /**
      * @var string
+     *
+     * @ORM\Id()
+     * @ORM\Column(type="AnswerId", name="id")
+     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $answerId;
 
     /**
      * @var string
+     *
+     * @ORM\Column()
      */
     private $body;
 
     /**
      * @var bool
+     *
+     * @ORM\Column(type="boolean")
      */
     private $correctAnswer;
 
     /**
      * @var DateTimeImmutable
+     *
+     * @ORM\Column(type="date")
      */
     private $datePublished;
 
     /**
-     * @var string
+     * @ORM\ManyToOne(targetEntity="App\Domain\UserManagement\User")
      */
     private $user;
 
     /**
-     * @var string
+     * @ORM\ManyToOne(targetEntity="App\Domain\UserManagement\User")
      */
     private $question;
 
     /**
      * @var int
+     *
+     * @ORM\Column(type="integer")
      */
     private $positiveVotes;
 
-   /**
+    /**
      * @var int
+     *
+     * @ORM\Column(type="integer")
      */
     private $negativeVotes;
 

@@ -13,37 +13,60 @@ use App\Domain\QuestionManagment\AnswerAggregate\Answer;
 use App\Domain\UserManagement\User;
 use DateTimeImmutable;
 use JsonSerializable;
+use Doctrine\ORM\Mapping as ORM;
 use League\OAuth2\Server\Entities\UserEntityInterface;
 
 /**
  * Question
  *
  * @package App\Domain\QuestionManagment\QuestionAggregate
+ *
+ * @ORM\Entity()
+ * @ORM\Table(name="questions")
+ * @IgnoreAnnotation("OA\Schema")
+ * @IgnoreAnnotation("OA\Property")
+ *
+ * @OA\Schema(
+ *     description="Question",
+ *     title="Question"
+ * )
  */
 class Question implements JsonSerializable
 {
     /**
      * @var string
+     *
+     * @ORM\Id()
+     * @ORM\Column(type="QuestionId", name="id")
+     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $questionId;
 
     /**
      * @var string
+     *
+     * @ORM\Column()
      */
     private $title;
 
     /**
      * @var string|null
+     *
+     * @ORM\Column()
      */
     private $body;
 
     /**
-     * @var string
+     * @var DateTimeImmutable
+     *
+     * @ORM\Column(type="date")
      */
     private $datePublished;
 
     /**
      * @var string
+     *
+     * @ORM\ManyToOne(targetEntity="App\Domain\UserManagement\User")
      */
     private $user;
 
@@ -56,7 +79,6 @@ class Question implements JsonSerializable
      * @var array
      */
     private $tag;
-
 
     /**
      * Question constructor.
