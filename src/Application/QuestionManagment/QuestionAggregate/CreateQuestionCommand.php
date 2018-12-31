@@ -9,10 +9,8 @@
 
 namespace App\Application\QuestionManagment\QuestionAggregate;
 
-use App\Domain\QuestionManagment\QuestionAggregate\QuestionId;
-use App\Domain\UserManagement\OAuth2\Scope;
+use App\Domain\QuestionManagment\QuestionAggregate\Question;
 use App\Domain\UserManagement\User;
-use DateTimeImmutable;
 
 /**
  * CreateQuestionCommand
@@ -21,13 +19,9 @@ use DateTimeImmutable;
  */
 final class CreateQuestionCommand
 {
-   /* /**
-     * @var string
-     */
-   /* private $questionId;*/
 
     /**
-     * @var string
+     * @var string|null
      */
     private $title;
 
@@ -41,19 +35,23 @@ final class CreateQuestionCommand
      */
     private $user;
 
+    private $tags;
+
     /**
      * Question constructor.
      * @param String $title
      * @param String $body
      * @param User $user
+     * @param array $tags
      */
-    public function __construct(String $title, String $body, User $user)
+    public function __construct(User $user, String $title, String $body, Array $tags = [])
     {
         $this->title = $title;
         $this->body = $body;
         $this->user = $user;
-    }
+        $this->tags = $tags;
 
+    }
     public function title(): string
     {
         return $this->title;
@@ -71,5 +69,10 @@ final class CreateQuestionCommand
     {
         return $this->user;
     }
-}
 
+    public function tags()
+    {
+        return $this->tags;
+    }
+
+}
